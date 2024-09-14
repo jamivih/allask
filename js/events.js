@@ -12,7 +12,7 @@ window.onload = function() {
         // Set the initial count from local storage
         const drinkCountId = document.getElementById(drink.dname);
         if (drinkCountId) {
-            drinkCountId.textContent = drink.count || 0;
+            drinkCountId.textContent = drink.count + ' kpl' || 0 + ' kpl';
         }
     });
 

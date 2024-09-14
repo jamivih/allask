@@ -29,35 +29,39 @@ function saveFormData() {
         dkcal = dkcal * (dcap * 10);
     }
 
-    const newDrink = {
-        dname: dname,
-        dcap: dcap,
-        dalc: dalc,
-        dkcal: dkcal,
-        count: 0
-    };
+    if (!dname || isNaN(dcap) || isNaN(dalc) || isNaN(dkcal)) {
+        alert('Täytä kaikki tiedot.');
+    } else {
+        const newDrink = {
+            dname: dname,
+            dcap: dcap,
+            dalc: dalc,
+            dkcal: dkcal,
+            count: 0
+        };
 
-    // Get the existing drinks from localStorage, or initialize an empty array if none exist
-    let drinks = JSON.parse(localStorage.getItem('drinks')) || [];
+        // Get the existing drinks from localStorage, or initialize an empty array if none exist
+        let drinks = JSON.parse(localStorage.getItem('drinks')) || [];
 
-    // Add the new drink to the array
-    drinks.push(newDrink);
+        // Add the new drink to the array
+        drinks.push(newDrink);
 
-    // Save the updated drinks array to localStorage
-    localStorage.setItem('drinks', JSON.stringify(drinks));
+        // Save the updated drinks array to localStorage
+        localStorage.setItem('drinks', JSON.stringify(drinks));
 
-    // Update the table to include the new drink
-    addDrinkToTable(newDrink);
+        // Update the table to include the new drink
+        addDrinkToTable(newDrink);
 
-    // Reset form after submission
-    document.getElementById('drinkForm').reset();
-    hideAddDrinkForm();
+        // Reset form after submission
+        document.getElementById('drinkForm').reset();
+        hideAddDrinkForm();
+    }
 }
-
 // Define the function to add a drink to the table globally
 function addDrinkToTable(drink) {
     const table = document.getElementById('myDrinks').getElementsByTagName('tbody')[0];
     const newRow = table.insertRow();
+    const lineBreak = document.createElement('br');
 
     const cell1 = newRow.insertCell(0);
     cell1.textContent =`${drink.dname}`;

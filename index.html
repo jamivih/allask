@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,34 +14,34 @@
     <script src="js/events.js"></script>
     <script src="js/init.js"></script>
     <script src="js/storage.js"></script>
-    
+
     <header>Alkoholilaskuri</header>
     <div class="drink">
-    <button id="showFormButton" onclick="addDrinkForm()">Lisää Juoma</button>
-    <form id="drinkForm" action="" onsubmit="saveFormData(); return false;">
-        <label for="dname">Juoman nimi</label>
-        <input type="text" id="dname" name="dname"><br>
+        <button id="showFormButton" onclick="addDrinkForm()">Lisää Juoma</button>
+        <form id="drinkForm" action="" onsubmit="saveFormData(); return false;">
+            <label for="dname">Juoman nimi</label>
+            <input type="text" id="dname" name="dname"><br>
 
-        <label for="dcap">Tilavuus (cl):</label>
-        <button type="button" onclick="decreaseValue('dcap')">-</button>
-        <input type="text" id="dcap" name="dcap" min="0" max="100">
-        <button type="button" onclick="increaseValue('dcap')">+</button><br>
+            <label for="dcap">Tilavuus (cl):</label>
+            <button type="button" onclick="decreaseValue('dcap')">-</button>
+            <input type="number" id="dcap" name="dcap" min="0" max="100">
+            <button type="button" onclick="increaseValue('dcap')">+</button><br>
 
-        <label for="dalc">Vahvuus:</label>
-        <button type="button" onclick="decreaseValue('dalc')">-</button>
-        <input type="text" id="dalc" name="dalc" min="0" max="100">
-        <button type="button" onclick="increaseValue('dalc')">+</button><br>
+            <label for="dalc">Vahvuus:</label>
+            <button type="button" onclick="decreaseValue('dalc')">-</button>
+            <input type="number" step=".1" id="dalc" name="dalc" value="5.5" min="0" max="100">
+            <button type="button" onclick="increaseValue('dalc')">+</button><br>
 
-        <label for="dkcal">Kalorit:</label>
-        <input type="text" id="dkcal" name="dkcal" min="0">
-        <select id="calorietype">
-            <option value="per100ml">kcal/100ml</option>
-            <option value="total">kcal/juoma</option>
-        </select><br>
-        <input type="submit" value="Lisää"><br>
-    </form>
-    <button id="cancelButton" onclick="hideAddDrinkForm()">Peruuta</button>
-</div>
+            <label for="dkcal">Kalorit:</label>
+            <input type="number" id="dkcal" name="dkcal" min="0">
+            <select id="calorietype">
+                <option value="per100ml">kcal/100ml</option>
+                <option value="total">kcal/juoma</option>
+            </select><br>
+            <input type="submit" value="Lisää"><br>
+        </form>
+        <button id="cancelButton" onclick="hideAddDrinkForm()">Peruuta</button>
+    </div>
     <div class="tablediv">
         <table id="myDrinks">
             <thead>
@@ -54,44 +55,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr>
-            <td>Original Long Drink</td>
-            <td class="drinkCap">0.33 l</td>
-            <td class="drinkAlc">5.5%</td>
-            <td class="drinkKcal">185 kcal</td>
-            <td id="OriginalLongDrink" class="drinkCount">0</td>
-            <td>
-                <button onclick="addDrink(this, 'OriginalLongDrink')">+</button>
-                <button onclick="deleteDrink(this, 'OriginalLongDrink')">-</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Lapin Kulta Pure</td>
-            <td class="drinkCap">0.33 l</td>
-            <td class="drinkAlc">4.5%</td>
-            <td class="drinkKcal">132 kcal</td>
-            <td id="LapinKultaPure" class="drinkCount">0</td>
-            <td><button id="addDrink" onclick="addDrink(this, 'LapinKultaPure')">+</button>
-                <button id="deleteDrink" onclick="deleteDrink(this, 'LapinKultaPure')">-</button></td>
-        </tr>
-        <tr>
-            <td>Rommikola</td>
-            <td class="drinkCap">0.31 l</td>
-            <td class="drinkAlc">8%</td>
-            <td class="drinkKcal">225 kcal</td>
-            <td id="Rommikola" class="drinkCount">0</td>
-            <td><button id="addDrink" onclick="addDrink(this, 'Rommikola')">+</button>
-                <button id="deleteDrink" onclick="deleteDrink(this, 'Rommikola')">-</button></td>
-        </tr>
-        <tr>
-            <td>Seltzer</td>
-            <td class="drinkCap">0.31 l</td>
-            <td class="drinkAlc">5%</td>
-            <td class="drinkKcal">105 kcal</td>
-            <td id="Seltzer" class="drinkCount">0</td>
-            <td><button id="addDrink" onclick="addDrink(this, 'Seltzer')">+</button>
-                <button id="deleteDrink" onclick="deleteDrink(this, 'Seltzer')">-</button></td>
-        </tr> -->
             </tbody>
         </table>
 

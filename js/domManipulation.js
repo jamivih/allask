@@ -20,7 +20,7 @@ function deleteDrink(button, drinkName) {
         let currentValue = parseInt(drinkCountId.textContent) || 0;
         if (currentValue > 0) {
             currentValue -= 1;
-            drinkCountId.textContent = currentValue;
+            drinkCountId.textContent = currentValue + ' kpl';
 
             updateLocalStorage(drinkName, currentValue);
         }
@@ -32,18 +32,25 @@ function deleteDrink(button, drinkName) {
 // Increase button function for add drink-form
 function increaseValue(fieldId) {
     let input = document.getElementById(fieldId);
-    let value = parseInt(input.value, 10);
+    let value = parseFloat(input.value, 10);
     value = isNaN(value) ? 0 : value;
-    input.value = value + 1;
+
+    if (input.id === 'dalc') {
+        input.value = (value + 0.1).toFixed(1);
+    } else {
+        input.value = value + 1;
+    }
 }
 
 
 // Decrease button function for add drink-form
 function decreaseValue(fieldId) {
     let input = document.getElementById(fieldId);
-    let value = parseInt(input.value, 10);
+    let value = parseFloat(input.value, 10);
     value = isNaN(value) ? 0 : value;
-    if(value > 0) {
+    if(value > 0 && input.id === 'dalc') {
+        input.value = (value - 0.1).toFixed(1);
+    } else if (value > 0 && input.id === 'dcap') {
         input.value = value - 1;
     }
 }
@@ -89,5 +96,6 @@ function addDrinkForm() {
 function hideAddDrinkForm() {
     document.getElementById('drinkForm').style.display = 'none';
     document.getElementById('cancelButton').style.display = 'none';
+    document.getElementById('drinkForm').reset();
 }
 
