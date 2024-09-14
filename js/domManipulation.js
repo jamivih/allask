@@ -60,7 +60,7 @@ function emptyList() {
     const drinkElements = document.querySelectorAll('.drinkCount');
 
     drinkElements.forEach(drinkElement => {
-        drinkElement.innerHTML = 0;
+        drinkElement.innerHTML = 0 + ' kpl';
         const drinkId = drinkElement.id;
         updateLocalStorage(drinkId, 0);
         
