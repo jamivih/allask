@@ -106,7 +106,10 @@ function addDrinkToTable(drink) {
     // Append buttons to the cell6
     cell6.appendChild(addButton);
     cell6.appendChild(deleteButton);
+    cell6.appendChild(document.createElement('br'))
+    cell6.appendChild(document.createElement('br'))
     cell6.appendChild(removeButton);
+    cell6.appendChild(document.createElement('br'))
 }
 
 // Function to remove a drink from the table and local storage
