@@ -84,7 +84,7 @@ function addDrinkToTable(drink) {
     cell5.classList.add('drinkCount');
     cell5.textContent = '0 kpl'; // Initial count is 0
 
-    const cell6 = newRow.insertCell(5); //+, -, and remove buttons
+    const cell6 = newRow.insertCell(5); //+, -  buttons
     // Add button for drinks-table
     const addButton = document.createElement('button');
     addButton.textContent = '+';
@@ -97,6 +97,7 @@ function addDrinkToTable(drink) {
     deleteButton.setAttribute('id', 'deleteDrink');
     deleteButton.setAttribute('onclick', `deleteDrink(this, '${drink.dname}')`);
 
+    const cell7 = newRow.insertCell(6); //remove button
     // Remove button for drinks-table
     const removeButton = document.createElement('button');
     removeButton.textContent = 'R';
@@ -106,10 +107,8 @@ function addDrinkToTable(drink) {
     // Append buttons to the cell6
     cell6.appendChild(addButton);
     cell6.appendChild(deleteButton);
-    cell6.appendChild(document.createElement('br'))
-    cell6.appendChild(document.createElement('br'))
-    cell6.appendChild(removeButton);
-    cell6.appendChild(document.createElement('br'))
+    cell7.appendChild(removeButton);
+
 }
 
 // Function to remove a drink from the table and local storage
