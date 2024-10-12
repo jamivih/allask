@@ -17,6 +17,28 @@ function getDrinkCount(drinkName) {
     return localStorage.getItem(drinkName) ? parseInt(localStorage.getItem(drinkName)) : 0;
 }
 
+function updateDrinkInStorage(dname, dcap, dalc, dkcal) {
+    // Get the current drinks from localStorage
+    let drinks = JSON.parse(localStorage.getItem('drinks')) || [];
+
+    // Find the drink by its name and update the values
+    drinks = drinks.map(drink => {
+        if (drink.dname === dname) {
+            return {
+                ...drink,
+                dcap: parseFloat(dcap),
+                dalc: parseFloat(dalc),
+                dkcal: parseFloat(dkcal)
+            };
+        }
+        return drink;
+    });
+
+    // Save the updated drinks array back to localStorage
+    localStorage.setItem('drinks', JSON.stringify(drinks));
+
+}
+
 // Function to save form data and update the table
 function saveFormData() {
     const dname = document.getElementById('dname').value;
@@ -66,23 +88,28 @@ function addDrinkToTable(drink) {
     const cell1 = newRow.insertCell(0);
     cell1.textContent =`${drink.dname}`;
 
+
     const cell2 = newRow.insertCell(1);
     cell2.classList.add('drinkCap');
     cell2.textContent = `${drink.dcap} l`;
+
 
     const cell3 = newRow.insertCell(2);
     cell3.classList.add('drinkAlc');
     cell3.textContent = `${drink.dalc}%`;
 
+
     const cell4 = newRow.insertCell(3);
     cell4.classList.add('drinkKcal');
     cell4.textContent = `${drink.dkcal.toFixed(0)} kcal`;
+
 
     const cell5 = newRow.insertCell(4);
     // Set the ID of the cell for drink count to the name of the drink
     cell5.id = drink.dname;
     cell5.classList.add('drinkCount');
     cell5.textContent = '0 kpl'; // Initial count is 0
+
 
     const cell6 = newRow.insertCell(5); //+, -  buttons
     // Add button for drinks-table
@@ -97,18 +124,35 @@ function addDrinkToTable(drink) {
     deleteButton.setAttribute('id', 'deleteDrink');
     deleteButton.setAttribute('onclick', `deleteDrink(this, '${drink.dname}')`);
 
-    const cell7 = newRow.insertCell(6); //remove button
-    // Remove button for drinks-table
+    const cell7 = newRow.insertCell(6);
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.className = 'editButton';
+    editButton.onclick = function() { editDrink(editButton); };
+
+    const cell8 = newRow.insertCell(7); //remove button
     const removeButton = document.createElement('button');
     removeButton.textContent = 'R';
     removeButton.setAttribute('id', 'removeDrink');
-    removeButton.setAttribute('onclick', `removeDrink('${drink.dname}')`);
+    removeButton.setAttribute('onclick', `deleteConfirmation('${drink.dname}')`);
 
     // Append buttons to the cell6
     cell6.appendChild(addButton);
     cell6.appendChild(deleteButton);
-    cell7.appendChild(removeButton);
+    cell7.appendChild(editButton);
+    cell8.appendChild(removeButton);
 
+    totalRow()
+    totalUpdate(); // Update totals if necessary
+
+}
+
+function deleteConfirmation(drinkName) {
+    if (confirm(`Poista ${drinkName}?`)) {
+        removeDrink(drinkName);
+    } else {
+        console.log('Cancel pressed');
+    }
 }
 
 // Function to remove a drink from the table and local storage
@@ -130,5 +174,6 @@ function removeDrink(drinkName) {
     drinks = drinks.filter(drink => drink.dname !== drinkName); // Filter out the drink to remove
     localStorage.setItem('drinks', JSON.stringify(drinks));
 
+    totalRow()
     totalUpdate(); // Update totals if necessary
 }

@@ -14,6 +14,56 @@ function addDrink(button, drinkName) {
     }
 }
 
+
+function editDrink(editButton) {
+    // Get the row of the drink that needs to be edited
+    const row = editButton.parentElement.parentElement;
+    const cells = row.getElementsByTagName('td');
+
+    // Replace the text in each cell with an input field
+    const dname = cells[0].textContent;
+    const dcap = cells[1].textContent.replace(' l', ''); // Remove ' l' from the display
+    const dalc = cells[2].textContent.replace('%', ''); // Remove '%' from the display
+    const dkcal = cells[3].textContent.replace(' kcal', ''); // Remove ' kcal' from the display
+
+    cells[0].innerHTML = `<input type="text" value="${dname}" id="editDname">`;
+    cells[1].innerHTML = `<input type="number" value="${dcap}" id="editDcap" step="0.01">`;
+    cells[2].innerHTML = `<input type="number" value="${dalc}" id="editDalc" step="0.01">`;
+    cells[3].innerHTML = `<input type="number" value="${dkcal}" id="editDkcal" step="1">`;
+
+    // Change the button text and onclick event to 'Save'
+    editButton.textContent = 'Save';
+    editButton.onclick = function() { saveEdit(editButton); };
+}
+
+function saveEdit(saveButton) {
+    // Get the row and input fields
+    const row = saveButton.parentElement.parentElement;
+    const cells = row.getElementsByTagName('td');
+
+    // Get the updated values from the input fields
+    const dname = document.getElementById('editDname').value;
+    const dcap = document.getElementById('editDcap').value;
+    const dalc = document.getElementById('editDalc').value;
+    const dkcal = document.getElementById('editDkcal').value;
+
+    // Update the row cells with the new values (and format them back to text)
+    cells[0].textContent = dname;
+    cells[1].textContent = `${parseFloat(dcap).toFixed(2)} l`;
+    cells[2].textContent = `${parseFloat(dalc).toFixed(1)}%`;
+    cells[3].textContent = `${parseFloat(dkcal).toFixed(0)} kcal`;
+
+    // Change the button text back to 'Edit' and restore the edit functionality
+    saveButton.textContent = 'Edit';
+    saveButton.onclick = function() { editDrink(saveButton); };
+
+    // Update the drink in localStorage
+    updateDrinkInStorage(dname, dcap, dalc, dkcal);
+}
+
+
+
+// Decrease button for drink-table
 function deleteDrink(button, drinkName) {
     const drinkCountId = document.getElementById(drinkName);
     if (drinkCountId) {
