@@ -112,6 +112,7 @@ function addDrinkToTable(drink) {
 
 
     const cell6 = newRow.insertCell(5); //+, -  buttons
+    cell6.className = 'cell6'
     // Add button for drinks-table
     const addButton = document.createElement('button');
     addButton.textContent = '+';
@@ -126,13 +127,13 @@ function addDrinkToTable(drink) {
 
     const cell7 = newRow.insertCell(6);
     const editButton = document.createElement('button');
-    editButton.textContent = 'Edit';
+    editButton.textContent = 'Edit'
     editButton.className = 'editButton';
     editButton.onclick = function() { editDrink(editButton); };
 
     const cell8 = newRow.insertCell(7); //remove button
     const removeButton = document.createElement('button');
-    removeButton.textContent = 'R';
+    removeButton.className = 'removeButton';
     removeButton.setAttribute('id', 'removeDrink');
     removeButton.setAttribute('onclick', `deleteConfirmation('${drink.dname}')`);
 

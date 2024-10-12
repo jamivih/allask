@@ -1,6 +1,28 @@
-
 .hidden {
     display: none;
 }
 
+/* .editButton {
+    background-image: url('edit.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    padding: 10px;
+} */
+
+.removeButton {
+    background-image: url('remove.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+    padding: 10px;
+    margin-left: 15px;
+}
+
+.cell6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 /* to be continued... */
