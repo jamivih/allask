@@ -11,7 +11,7 @@
 } */
 
 .removeButton {
-    background-image: url('remove.png');
+    background-image: url('../images/remove.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 80%;
