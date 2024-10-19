@@ -14,7 +14,9 @@
     <script src="js/events.js"></script>
     <script src="js/init.js"></script>
     <script src="js/storage.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
     <header>Alkoholilaskuri</header>
     <div class="drink">
         <button id="showFormButton" onclick="addDrinkForm()">Lisää Juoma</button>
@@ -72,6 +74,22 @@
     <div class="buttons">
         <button id="Empty" onclick="emptyList()">Nollaa</button>
     </div>
+    <div class="calculation">
+        <p class="calculation-input">Sukupuoli</p>
+        <label>
+            <input type="radio" name="gender" value="male"> Mies
+          </label><br>
+          <label>
+            <input type="radio" name="gender" value="female"> Nainen
+          </label><br>
+        <p class="calculation-input">Ikä</p><input type="number" id="age" required>
+        <p class="calculation-input">Paino</p><input type="number" id="weight" required>
+        <p class="calculation-input">Juominen aloitettu</p><input type="text" id="start" placeholder="22.00" required>
+        <p class="calculation-input">Juominen lopetettu</p><input type="text" id="end" placeholder="22.00" required>
+        <button onclick='calculateTimeDifference()'>Ok</button>
+        <p id="permille"></p>
+    </div>
+    <canvas id="permillesChart"></canvas>
 </body>
 
 </html>
